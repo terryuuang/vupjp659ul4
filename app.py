@@ -72,8 +72,7 @@ def submit_input(url_dict):
             final_results += "二、查證情形：\n因為沒有提供參考文章，未進行查證分析。"
 
         save_and_display_content(final_results, "assistant")
-        save_and_display_content(f"使用 {sum_total_promptTokens} 個prompt tokens\n\n使用 {
-                                 sum_total_completionTokens} 個completion tokens", "assistant")
+        save_and_display_content(f"使用 {sum_total_promptTokens} 個prompt tokens\n\n使用 {sum_total_completionTokens} 個completion tokens", "assistant")
 
     except Exception as e:
         st.error(f"在分析過程中發生錯誤: {str(e)}")
