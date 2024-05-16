@@ -1,4 +1,4 @@
-from utils import get_and_handle_articles, analytics_result, main_assistant_id, supporting_assistant_id, unit, username, password, url_dict
+from utils import *
 import streamlit as st
 
 
