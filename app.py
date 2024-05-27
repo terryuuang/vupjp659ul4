@@ -2,8 +2,6 @@ from utils import *
 import streamlit as st
 
 
-
-
 def save_and_display_content(content, role="user"):
     """ 儲存和顯示streamlit對話紀錄 """
     st.session_state.messages.append({"role": role, "content": content})
@@ -59,7 +57,7 @@ def submit_input(url_dict):
                 str(main_content), main_assistant_id)
             sum_total_promptTokens += total_promptTokens
             sum_total_completionTokens += total_completionTokens
-            final_results = f"{unit}\n\n{results}\n\n"
+            final_results = f"{results}\n\n"
 
         # 如果有參考文章則進行查證分析
         if supporting_content:
