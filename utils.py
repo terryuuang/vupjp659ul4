@@ -20,8 +20,7 @@ main_assistant_id = 'asst_NeGinXBAF8MXmQZQ4YwUlwPH'
 supporting_assistant_id = 'asst_pFPaTVDUMwl5cFc3lzaOCUmV'
 api_key = os.getenv('api_key')
 organization = os.getenv('organization')
-username = os.getenv('username')
-password = os.getenv('password')
+
 
 client = OpenAI(
     organization=organization,

@@ -1,13 +1,19 @@
 from utils import *
+import bcrypt
 import streamlit as st
 
+
+plain_username = os.getenv('username')
+plain_password = os.getenv('password')
+# 將明文密碼加密
+hashed_username = bcrypt.hashpw(plain_username.encode('utf-8'), bcrypt.gensalt())
+hashed_password = bcrypt.hashpw(plain_password.encode('utf-8'), bcrypt.gensalt())
 
 def save_and_display_content(content, role="user"):
     """ 儲存和顯示streamlit對話紀錄 """
     st.session_state.messages.append({"role": role, "content": content})
     with st.chat_message(role):
         st.markdown(content)
-
 
 def submit_input(url_dict):
     """
@@ -80,11 +86,11 @@ def login():
     """登入畫面"""
     st.header("登入")
 
-    username = st.text_input("使用者名稱")
-    password = st.text_input("密碼", type="password")
+    input_username = st.text_input("使用者名稱")
+    inpit_password = st.text_input("密碼", type="password")
 
     if st.button("登入"):
-        if username ==  username and password == password:
+        if bcrypt.checkpw(input_username.encode('utf-8'), hashed_username) and bcrypt.checkpw(inpit_password.encode('utf-8'), hashed_password):
             st.session_state.logged_in = True
             st.rerun()
         else:
@@ -127,14 +133,19 @@ with st.sidebar:
         login()
     else:
         st.header("輸入主要文章URL")
+        url2, url4, url5, url6 = "", "", "", ""
         url1 = st.text_input(label="主要文章URL1", value="")
-        url2 = st.text_input(label="主要文章URL2", value="")
+        if url1:
+            url2 = st.text_input(label="主要文章URL2", value="")
 
         st.header("輸入參考文章URL")
         url3 = st.text_input(label="參考文章URL1", value="")
-        url4 = st.text_input(label="參考文章URL2", value="")
-        url5 = st.text_input(label="參考文章URL3", value="")
-        url6 = st.text_input(label="參考文章URL4", value="")
+        if url3:
+            url4 = st.text_input(label="參考文章URL2", value="")
+        if url4:
+            url5 = st.text_input(label="參考文章URL3", value="")
+        if url5:
+            url6 = st.text_input(label="參考文章URL4", value="")
 
         submit_button = st.button("執行")
 
